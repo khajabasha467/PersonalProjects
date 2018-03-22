@@ -1,0 +1,109 @@
+1. Please Modify connection string in the web.config accordingly.
+
+Eg:
+<add connectionString="Data Source=.\sqlexpress;Initial Catalog=BagsIT;Integrated Security=SSPI;" name="BagsITConn" />
+
+
+2. Execute below queries in the DB
+
+--Creating Database BagsIT
+
+Create Database BagsIT
+
+
+USE [BagsIT]
+GO
+
+--Creating Table Event
+
+CREATE TABLE [dbo].[Event](
+	[EventId] [int] IDENTITY(1,1) NOT NULL,
+	[Client] [nvarchar](40) NOT NULL,
+	[ProcessType] [nvarchar](20) NOT NULL,
+	[Location] [nvarchar](50) NOT NULL,
+	[DepartDate] [nvarchar](10) NOT NULL,
+	[ArrivalDate] [nvarchar](10) NOT NULL,
+	[City] [nvarchar](32) NOT NULL,
+	[LocationID] [nvarchar](20) NOT NULL,
+	[Source] [nvarchar](32) NOT NULL,
+ CONSTRAINT [PK__Event__7944C810457416C3] PRIMARY KEY CLUSTERED 
+(
+	[EventId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+--Creating Table Guest
+
+CREATE TABLE [dbo].[Guest](
+	[EventGuestID] [int] IDENTITY(1,1) NOT NULL,
+	[Client] [nvarchar](40) NOT NULL,
+	[ProcessType] [nvarchar](20) NOT NULL,
+	[EventId] [int] NOT NULL,
+	[FirstName] [nvarchar](10) NOT NULL,
+	[LastName] [nvarchar](10) NOT NULL,
+	[MiddleName] [nvarchar](32) NULL,
+	[EmailAddress] [nvarchar](50) NULL,
+	[Phone] [int] NULL,
+	[NumberOfBags] [int] NOT NULL,
+	[Status] [nvarchar](10) NULL CONSTRAINT [DF_Guest_Status]  DEFAULT (N'unenrolled'),
+	[Gender] [nvarchar](1) NULL,
+	[BirthDate] [nvarchar](50) NULL,
+	[PassportCitizenship] [nvarchar](3) NULL,
+	[PassportNumber] [nvarchar](25) NULL,
+	[PassportExpiration] [nvarchar](50) NULL,
+	[PassportCountry] [nvarchar](3) NULL,
+	[Opt1] [nvarchar](10) NULL,
+	[FirstNameAlias] [nvarchar](50) NULL,
+	[LastNameAlias] [nvarchar](50) NULL,
+	[Eligible] [bit] NULL CONSTRAINT [DF_Guest_Eligible]  DEFAULT ((1)),
+	[PartyGroupID] [nvarchar](25) NULL CONSTRAINT [DF_Guest_PartyGroupID]  DEFAULT ((0)),
+	[ArrivalDate] [nvarchar](50) NOT NULL,
+	[DepartDate] [nvarchar](50) NOT NULL,
+	[DepartGroup] [nvarchar](10) NULL,
+	[GuestType] [nvarchar](5) NULL,
+	[Segments] [int] NOT NULL,
+ CONSTRAINT [PK_Guest] PRIMARY KEY CLUSTERED 
+(
+	[EventGuestID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+ALTER TABLE [dbo].[Guest]  WITH CHECK ADD  CONSTRAINT [FK_Guest_Event] FOREIGN KEY([EventId])
+REFERENCES [dbo].[Event] ([EventId])
+GO
+
+ALTER TABLE [dbo].[Guest] CHECK CONSTRAINT [FK_Guest_Event]
+GO
+
+
+
+--Creating Table Segment
+
+
+CREATE TABLE [dbo].[Segment](
+	[SegmentID] [int] IDENTITY(1,1) NOT NULL,
+	[EventGuestID] [int] NOT NULL,
+	[Carrier] [nvarchar](2) NOT NULL,
+	[FlightNumber] [nvarchar](6) NOT NULL,
+	[DepartureCity] [nvarchar](3) NOT NULL,
+	[ArrivalCity] [nvarchar](3) NULL,
+	[DepartureDate] [nvarchar](50) NOT NULL,
+	[DepartureTime] [nvarchar](7) NULL,
+	[PNR] [nvarchar](6) NULL,
+	[Operation] [nvarchar](6) NULL CONSTRAINT [DF_Segment_Operation]  DEFAULT (N'Add'),
+ CONSTRAINT [PK_Segment] PRIMARY KEY CLUSTERED 
+(
+	[SegmentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+
+
+

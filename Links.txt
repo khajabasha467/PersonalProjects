@@ -1,0 +1,10 @@
+Post methods:
+
+http://localhost:56460/api/oac/registerEvent
+
+http://localhost:56460/api/oac/registerguest
+
+
+Header:
+
+Content-Type: Application/json

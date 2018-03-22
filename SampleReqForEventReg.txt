@@ -1,0 +1,10 @@
+{
+   Client:"test2",
+   ProcessType:"Manual",
+   Location:"NYC",
+   DepartDate:"2017-04-25",
+   ArrivalDate:"2017-04-26",
+   City:"Newyork",
+   LocationID:"NYC",
+   Source:"Web"
+}

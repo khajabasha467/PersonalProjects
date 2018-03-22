@@ -1,0 +1,51 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BagsIT",
+		"_postman_id": "aa9c0520-60dd-37a8-f79c-3a01024d45b3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:56460/api/oac/registerEvent",
+			"request": {
+				"url": "http://localhost:56460/api/oac/registerEvent",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\nClient:\"test\",\nProcessType:\"Manual\",\nLocation:\"NYC\",\nDepartDate:\"2017-04-25\",\nArrivalDate:\"2017-04-26\",\nCity:\"Newyork\",\nLocationID:\"NYC\",\nSource:\"Web\"\n}"
+				},
+				"description": "sample request for registering Event"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:56460/api/oac/registerguest",
+			"request": {
+				"url": "http://localhost:56460/api/oac/registerguest",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\nClient :\"test\",\nProcessType :\"manual\",\nEventId :\"1\",\nFirstName :\"ron\",\nLastName :\"dear\",\nMiddleName :\"mear\",\nEmailAddress :\"test@test.com\",\nPhone :\"3028015000\",\nNumberOfBags :\"5\",\nStatus :\"open\",\nGender :\"M\",\nBirthDate :\"1991-04-03\",\nPassportCitizenship :\"USA\",\nPassportNumber :\"023A22\",\nPassportExpiration :\"2018-05-25\",\nPassportCountry :\"USA\",\nOpt1 :\"\",\nFirstNameAlias :\"\",\nLastNameAlias :\"\",\nEligible :true,\nPartyGroupID :\"\",\nArrivalDate :\"2017-04-26\",\nDepartDate :\"2017-04-25\",\nDepartGroup :\"\",\nGuestType :\"\",\nSegments :[\n{\nCarrier :\"IA\",\nFlightNumber :\"123456\",\nDepartureCity :\"NYC\",\nArrivalCity :\"BOW\",\nDepartureDate :\"2017-04-25\",\nDepartureTime  :\"10:00\",\nPNR :\"123456\",\nOperation :\"Add\"\t\n},\n{\nCarrier :\"AI\",\nFlightNumber :\"123457\",\nDepartureCity :\"BOW\",\nArrivalCity :\"NYC\",\nDepartureDate :\"2017-04-26\",\nDepartureTime  :\"20:00\",\nPNR :\"123457\",\nOperation :\"Add\"\t\n}\n}\n}"
+				},
+				"description": "registerguest"
+			},
+			"response": []
+		}
+	]
+}
